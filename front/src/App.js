@@ -1,0 +1,87 @@
+import React, { Component } from 'react'
+import ApolloClient from 'apollo-boost'
+import { ApolloProvider } from 'react-apollo'
+import { Route, Link } from 'react-router-dom'
+import { Provider } from 'react-redux'
+
+import ServicesList from './components/services/ServicesList'
+import CustomersList from './components/customers/CustomersList'
+import CustomerDetailPage from './components/customers/CustomerDetailPage'
+import ServiceDetailPage from './components/services/ServiceDetailPage'
+import AddCustomer from './components/customers/AddCustomer'
+import AddService from './components/services/AddService'
+import store from './components/store/index'
+
+// Apollo client setup
+const client = new ApolloClient({
+	uri: 'http://localhost:4000/g'
+})
+
+class App extends Component {
+	render() {
+		return (
+			<Provider store={store}>
+				<ApolloProvider client={client}>
+					<div className='container'>
+						<div className='menu__header'>
+							<h1 className='menu__main-header'>
+								Serwisy SKŁADMUZYCZNY
+							</h1>
+							<Link className='menu__button' to='/services'>
+								Sewisy
+							</Link>
+							<Link
+								className='menu__button'
+								to='/customers'>
+								Klienci
+							</Link>
+							<Link
+								className='menu__button'
+								to='/customer/addCustomer/'>
+								Nowy Serwis
+							</Link>
+						</div>
+
+						<Route
+							exact
+							path='/'
+							component={ServicesList}
+						/>
+						<Route
+							exact
+							path='/services'
+							component={ServicesList}
+						/>
+						<Route
+							exact
+							path='/customers'
+							component={CustomersList}
+						/>
+						<Route
+							exact
+							path='/services/RMA/:serviceID'
+							component={ServiceDetailPage}
+						/>
+						<Route
+							exact
+							path='/customer/:customerID'
+							component={CustomerDetailPage}
+						/>
+						<Route
+							exact
+							path='/customer/addCustomer/'
+							component={AddCustomer}
+						/>
+						<Route
+							exact
+							path='/services/addService/'
+							component={AddService}
+						/>
+					</div>
+				</ApolloProvider>
+			</Provider>
+		)
+	}
+}
+
+export default App
