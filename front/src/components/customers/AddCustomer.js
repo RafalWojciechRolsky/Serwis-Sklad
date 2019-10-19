@@ -10,17 +10,10 @@ import {
 	// getCustomerByAllQuery
 } from '../../queries/queries'
 
-class AddCustomer extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			name: '',
-			mail: '',
-			phoneNumber: ''
-		}
-	}
+const AddCustomer = props => {
 
-	handleSubmit = e => {
+
+	const handleSubmit = e => {
 		e.preventDefault()
 		this.props.addCustomer({
 			variables: {
@@ -31,14 +24,14 @@ class AddCustomer extends Component {
 		})
 	}
 
-	handleChange = e => {
-		this.setState({
-			[e.target.name]: e.target.value
-		})
-	}
+	// handleChange = e => {
+	// 	this.setState({
+	// 		[e.target.name]: e.target.value
+	// 	})
+	// }
 
-	render() {
-		console.log(this.props)
+	
+		// console.log(this.props)
 		return (
 			<div className='customerDetail'>
 				<h1 className='customerDetail__header'>
@@ -53,8 +46,8 @@ class AddCustomer extends Component {
 						Imię i Nazwisko
 					</label>
 					<input
-						onChange={this.handleChange}
-						value={this.props.name}
+						onChange={this.props.handleChange}
+						// value={this.props.name}
 						name='name'
 						className='customerDetail__input'
 						type='text'
@@ -66,7 +59,7 @@ class AddCustomer extends Component {
 						Mail
 					</label>
 					<input
-						onChange={this.handleChange}
+						onChange={this.props.handleChange}
 						value={this.props.mail}
 						name='mail'
 						className='customerDetail__input'
@@ -76,11 +69,11 @@ class AddCustomer extends Component {
 					<label
 						phone='phoneNumber'
 						className='customerDetail__label'
-						htmlFor=''>
+						htmlFor='phoneNumber'>
 						Numer telefonu
 					</label>
 					<input
-						onChange={this.handleChange}
+						onChange={this.props.handleChange}
 						value={this.props.phoneNumber}
 						name='phoneNumber'
 						className='customerDetail__input'
@@ -98,7 +91,7 @@ class AddCustomer extends Component {
 			</div>
 		)
 	}
-}
+
 
 const mapStateToProps = state => {
 	return {
@@ -108,7 +101,20 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps)(
+const mapDispatchToProps = dispatch => {
+	return {
+		handleChange: e => {
+			console.log(e.target.value);
+			
+			dispatch({
+				type: 'ADD_TO_STATE',
+				[e.target.name]: e.target.value
+			})
+		}
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(
 	compose(graphql(addCustomer, { name: 'addCustomer' }))(
 		AddCustomer
 	)
