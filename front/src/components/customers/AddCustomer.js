@@ -7,8 +7,8 @@ import LinkButton from '../LinkButton'
 import constants from './../store/constants'
 
 import {
-	addCustomer,
-	getCustomerByAllQuery
+	addCustomer
+	// getCustomerByAllQuery
 } from '../../queries/queries'
 
 const { ADD_NAME, ADD_MAIL, ADD_PHONE } = constants
@@ -50,7 +50,7 @@ const AddCustomer = props => {
 				<label
 					className='customerDetail__label'
 					htmlFor='mail'>
-					Mail
+					Kontakt telefoniczny
 				</label>
 				<input
 					onChange={props.handleChangeMail}
@@ -64,7 +64,7 @@ const AddCustomer = props => {
 					phone='phoneNumber'
 					className='customerDetail__label'
 					htmlFor='phoneNumber'>
-					Numer telefonu
+					Kontakt telefoniczny
 				</label>
 				<input
 					onChange={props.handleChangePhone}
@@ -77,7 +77,7 @@ const AddCustomer = props => {
 
 				<LinkButton
 					className='customerDetail__button customerDetail__button--btn'
-					to='/customer/addService/'
+					to='/services/addService/'
 					onClick={handleSubmitGraphQL}>
 					Dodaj klienta i przejdź do serwisu
 				</LinkButton>
@@ -124,8 +124,23 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(
-	compose(
-		graphql(addCustomer, { name: 'addCustomer' }),
-		graphql(getCustomerByAllQuery)
-	)(AddCustomer)
+	compose(graphql(addCustomer, { name: 'addCustomer' }))(
+		AddCustomer
+	)
 )
+
+// export default connect(
+// 	mapStateToProps,
+// 	mapDispatchToProps
+// )(compose(
+// 	graphql(addCustomer, { name: 'addCustomer' }),
+// 	graphql(getCustomerByAllQuery, {
+// 		options: props => ({
+// 			variables: {
+// 				name: 'Rafał Maje',
+// 				mail: 'zamowienia@skladmuzyczny.pl',
+// 				phone: '791 946 49312 346-18-42'
+// 			}
+// 		})
+// 	})
+// )(AddCustomer))

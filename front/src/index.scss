@@ -28,6 +28,14 @@ html {
 	font-size: 62.5%;
 }
 
+textarea {
+	font-family: inherit;
+	font-size: inherit;
+	margin-top: .3rem;
+	outline-color: $main-color-beige;
+	background-position: bottom right;
+}
+
 body {
 	font-weight: 400;
 	line-height: 1.6;
@@ -257,6 +265,10 @@ body {
 	background-color: $main-color-beige;
 	padding: 1rem;
 	text-align: center;
+
+	&--add {
+		background-color: $main-color-white;
+	}
 }
 
 .serviceDetail__description {

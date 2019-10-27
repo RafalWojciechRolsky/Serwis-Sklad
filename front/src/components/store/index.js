@@ -4,9 +4,9 @@ import constants from './constants'
 const { ADD_NAME, ADD_MAIL, ADD_PHONE } = constants
 
 const initialState = {
-	name: '1',
-	mail: '2',
-	phoneNumber: '3'
+	name: '',
+	mail: '',
+	phoneNumber: ''
 }
 
 const reducer = (state = initialState, action) => {
