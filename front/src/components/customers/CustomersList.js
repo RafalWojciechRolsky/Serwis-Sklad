@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { graphql } from 'react-apollo'
 import { getCustomersQuery } from '../../queries/queries'
 import CustomerElementList from './CustomerElementList'
 import CustomerHeader from './CustomerHeader'
 
-class CustomersList extends Component {
-	displayCustomers = () => {
-		var data = this.props.data
+const CustomersList = props => {
+	const displayCustomers = () => {
+		var data = props.data
 		if (data.loading) {
 			return <div>Loading ...</div>
 		} else {
@@ -16,14 +16,12 @@ class CustomersList extends Component {
 		}
 	}
 
-	render() {
-		return (
-			<div className='main-container'>
-				<CustomerHeader />
-				<ul className='list'>{this.displayCustomers()}</ul>
-			</div>
-		)
-	}
+	return (
+		<div className='main-container'>
+			<CustomerHeader />
+			<ul className='list'>{displayCustomers()}</ul>
+		</div>
+	)
 }
 
 export default graphql(getCustomersQuery)(CustomersList)

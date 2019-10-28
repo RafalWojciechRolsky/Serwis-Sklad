@@ -1,18 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { graphql } from 'react-apollo'
 import { getServicesQuery } from '../../queries/queries'
 
 import ServiceElementList from './ServiceElementList'
 import ServiceHeader from './ServiceHeader'
 
-class ServicesList extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {}
-	}
-
-	displayServices = () => {
-		var data = this.props.data
+const ServicesList = props => {
+	const displayServices = () => {
+		var data = props.data
 		if (data.loading) {
 			return <div>Loading ...</div>
 		} else {
@@ -29,14 +24,12 @@ class ServicesList extends Component {
 		}
 	}
 
-	render() {
-		return (
-			<div className='main-container'>
-				<ServiceHeader />
-				<ul className='list'>{this.displayServices()}</ul>
-			</div>
-		)
-	}
+	return (
+		<div className='main-container'>
+			<ServiceHeader />
+			<ul className='list'>{displayServices()}</ul>
+		</div>
+	)
 }
 
 export default graphql(getServicesQuery)(ServicesList)
