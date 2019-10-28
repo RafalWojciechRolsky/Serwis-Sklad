@@ -24,7 +24,6 @@ const AddCustomer = props => {
 			}
 		})
 	}
-	console.log(props)
 
 	return (
 		<div className='customerDetail'>
@@ -50,7 +49,7 @@ const AddCustomer = props => {
 				<label
 					className='customerDetail__label'
 					htmlFor='mail'>
-					Kontakt telefoniczny
+					Kontakt mailowy
 				</label>
 				<input
 					onChange={props.handleChangeMail}

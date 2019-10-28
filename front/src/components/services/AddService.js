@@ -1,13 +1,34 @@
 import React from 'react'
-// import { graphql } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import { flowRight as compose } from 'lodash'
 import { connect } from 'react-redux'
 
-import {} from '../../queries/queries'
+import LinkButton from '../LinkButton'
+import { addServiceMutation } from '../../queries/queries'
+import constants from './../store/constants'
+
+const {
+	ADD_MODEL,
+	ADD_BRAND,
+	ADD_TYPE,
+	ADD_WHERE_TO_FIX,
+	ADD_DESCRIPTION
+} = constants
 
 const AddService = props => {
-	console.log(props)
-
+	const handleSubmitGraphQL = e => {
+		e.preventDefault()
+		props.addServiceMutation({
+			variables: {
+				model: props.model,
+				brand: props.brand,
+				type: props.type,
+				whereToFix: props.whereToFix,
+				description: props.description,
+				customerId: '5d8c9dd2807e981eb74ba5f1'
+			}
+		})
+	}
 	return (
 		<div className='customerDetail'>
 			{/* ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -15,7 +36,9 @@ const AddService = props => {
 			<h1 className='customerDetail__header'>
 				Dane klienta
 			</h1>
-			<form className='customerDetail__form'>
+			<form
+				className='customerDetail__form'
+				onSubmit={handleSubmitGraphQL}>
 				<label
 					className='customerDetail__label'
 					htmlFor='name'>
@@ -23,6 +46,7 @@ const AddService = props => {
 				</label>
 				<input
 					value={props.name}
+					onChange={() => {}}
 					name='name'
 					className='customerDetail__input'
 					type='text'
@@ -35,6 +59,7 @@ const AddService = props => {
 				</label>
 				<input
 					value={props.mail}
+					onChange={() => {}}
 					name='mail'
 					className='customerDetail__input'
 					type='text'
@@ -48,6 +73,7 @@ const AddService = props => {
 				</label>
 				<input
 					value={props.phoneNumber}
+					onChange={() => {}}
 					name='phoneNumber'
 					className='customerDetail__input'
 					type='text'
@@ -67,6 +93,8 @@ const AddService = props => {
 				</label>
 				<input
 					name='model'
+					value={props.model}
+					onChange={props.handleChangeModel}
 					className='customerDetail__input'
 					type='text'
 					placeholder='Podaj Model'
@@ -78,6 +106,8 @@ const AddService = props => {
 				</label>
 				<input
 					name='brand'
+					value={props.brand}
+					onChange={props.handleChangeBrand}
 					className='customerDetail__input'
 					type='text'
 					placeholder='Podaj Brand'
@@ -89,6 +119,8 @@ const AddService = props => {
 				</label>
 				<input
 					name='type'
+					value={props.type}
+					onChange={props.handleChangeType}
 					className='customerDetail__input'
 					type='text'
 					placeholder='Podaj typ przedmiotu naprawy'
@@ -100,6 +132,8 @@ const AddService = props => {
 				</label>
 				<input
 					name='whereToFix'
+					value={props.whereToFix}
+					onChange={props.handleChangeWhereToFix}
 					className='customerDetail__input'
 					type='text'
 					placeholder='Miejsce naprawy'
@@ -112,13 +146,19 @@ const AddService = props => {
 				<textarea
 					rows='15'
 					name='description'
+					value={props.description}
+					onChange={props.handleChangeDescription}
 					className='customerDetail__input'
 					type='text'
-					placeholder='Opis usterki'
+					placeholder='Tu napisz co jest do naprawy'
 				/>
-				<button className='customerDetail__button customerDetail__button--btn'>
+
+				<LinkButton
+					className='customerDetail__button customerDetail__button--btn'
+					to='/'
+					onClick={handleSubmitGraphQL}>
 					Dodaj naprawę do bazy danych
-				</button>
+				</LinkButton>
 			</form>
 		</div>
 	)
@@ -128,12 +168,62 @@ const mapStateToProps = state => {
 	return {
 		name: state.name,
 		mail: state.mail,
-		phoneNumber: state.phoneNumber
+		phoneNumber: state.phoneNumber,
+		model: state.model,
+		brand: state.brand,
+		type: state.type,
+		whereToFix: state.whereToFix,
+		description: state.description
 	}
 }
 
-export default connect(mapStateToProps)(
-	compose()(AddService)
+const mapDispatchToProps = dispatch => {
+	return {
+		handleChangeModel: e => {
+			const action = {
+				type: ADD_MODEL,
+				model: e.target.value
+			}
+			dispatch(action)
+		},
+		handleChangeBrand: e => {
+			const action = {
+				type: ADD_BRAND,
+				brand: e.target.value
+			}
+			dispatch(action)
+		},
+		handleChangeType: e => {
+			const action = {
+				type: ADD_TYPE,
+				_type: e.target.value
+			}
+			dispatch(action)
+		},
+		handleChangeWhereToFix: e => {
+			const action = {
+				type: ADD_WHERE_TO_FIX,
+				whereToFix: e.target.value
+			}
+			dispatch(action)
+		},
+		handleChangeDescription: e => {
+			const action = {
+				type: ADD_DESCRIPTION,
+				description: e.target.value
+			}
+			dispatch(action)
+		}
+	}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(
+	compose(
+		graphql(addServiceMutation, {
+			name: 'addServiceMutation'
+		})
+	)(AddService)
 )
-// graphql(getCustomersQuery, { name: 'getCustomersQuery' }),
-// graphql(addServiceMutation, {		name: 'addServiceMutation'	})

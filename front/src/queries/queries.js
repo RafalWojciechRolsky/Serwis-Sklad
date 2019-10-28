@@ -115,6 +115,42 @@ const addCustomer = gql`
 	}
 `
 
+const addServiceMutation = gql`
+	mutation addService(
+		$model: String!
+		$brand: String!
+		$type: String!
+		$description: String!
+		$whereToFix: String!
+		$customerId: String!
+	) {
+		addService(
+			model: $model
+			brand: $brand
+			description: $description
+			type: $type
+			customerId: $customerId
+			whereToFix: $whereToFix
+		) {
+			id
+			model
+			brand
+			type
+			whereToFix
+			RMA
+			createdAt
+			description
+			price
+			status
+			internalAttention
+			isActive
+			customerId {
+				id
+			}
+		}
+	}
+`
+
 // const addServiceMutation = gql`
 // 	mutation addService(
 // 		$model: String!
@@ -169,7 +205,6 @@ export {
 	getServiceByRMAQuery,
 	getCustomerByNameQuery,
 	getCustomerByAllQuery,
-	addCustomer
-
-	// addServiceMutation,
+	addCustomer,
+	addServiceMutation
 }
