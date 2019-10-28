@@ -7,7 +7,7 @@ import ServiceHeader from './ServiceHeader'
 
 const ServicesList = props => {
 	const displayServices = () => {
-		var data = props.data
+		let data = props.data
 		if (data.loading) {
 			return <div>Loading ...</div>
 		} else {

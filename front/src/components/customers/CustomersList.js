@@ -6,7 +6,7 @@ import CustomerHeader from './CustomerHeader'
 
 const CustomersList = props => {
 	const displayCustomers = () => {
-		var data = props.data
+		let data = props.data
 		if (data.loading) {
 			return <div>Loading ...</div>
 		} else {
