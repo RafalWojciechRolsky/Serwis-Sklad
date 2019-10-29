@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { graphql } from 'react-apollo'
 import { getServicesQuery } from '../../queries/queries'
 
@@ -23,6 +23,12 @@ const ServicesList = props => {
 			})
 		}
 	}
+
+	// useEffect(() => {
+	// 	window.location.reload()
+	// }, [])
+
+	useEffect(() => {})
 
 	return (
 		<div className='main-container'>

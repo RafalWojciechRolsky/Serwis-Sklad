@@ -152,7 +152,6 @@ const AddService = props => {
 					type='text'
 					placeholder='Tu napisz co jest do naprawy'
 				/>
-
 				<LinkButton
 					className='customerDetail__button customerDetail__button--btn'
 					to='/'
