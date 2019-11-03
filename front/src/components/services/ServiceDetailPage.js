@@ -1,9 +1,11 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
 import { getServiceByRMAQuery } from '../../queries/queries'
+import CustomerPartOfServiceElementList from './serviceListParts/CustomerPartOfServiceElementList'
 
 const ServiceDetailPage = props => {
 	if (props.data.serviceByRMA) {
+		const details = true
 		return (
 			<div className='serviceDetail'>
 				<h1 className='serviceDetail__header'>
@@ -49,7 +51,12 @@ const ServiceDetailPage = props => {
 									Klient
 								</div>
 								<div className='serviceDetail__divTableCell'>
-									{props.data.serviceByRMA.customerId.name}
+									<CustomerPartOfServiceElementList
+										customerId={
+											props.data.serviceByRMA.customerId
+										}
+										details={details}
+									/>
 								</div>
 							</div>
 						</div>

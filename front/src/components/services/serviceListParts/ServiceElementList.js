@@ -38,11 +38,9 @@ const Service = props => {
 				<span> {brand}</span>
 				<span> {type}</span>
 				<span> {createdAt}</span>
-				<span>
-					<CustomerPartOfServiceElementList
-						customerId={customerId}
-					/>
-				</span>
+				<CustomerPartOfServiceElementList
+					customerId={customerId}
+				/>
 			</Link>
 		</li>
 	)

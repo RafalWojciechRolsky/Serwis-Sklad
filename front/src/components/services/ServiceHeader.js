@@ -14,8 +14,8 @@ const ServiceHeader = () => {
 				Data przyjęcia
 			</h3>
 			<h3 className='container-columns__titles'>Klient</h3>
+			<h3 className='container-columns__titles'>Mail</h3>
 			<h3 className='container-columns__titles'>Telefon</h3>
-			<h3 className='container-columns__titles'>Status</h3>
 		</div>
 	)
 }
