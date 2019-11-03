@@ -6,10 +6,7 @@ import { connect } from 'react-redux'
 import LinkButton from '../LinkButton'
 import constants from './../store/constants'
 
-import {
-	addCustomer
-	// getCustomerByAllQuery
-} from '../../queries/queries'
+import { addCustomer } from '../../queries/queries'
 
 const { ADD_NAME, ADD_MAIL, ADD_PHONE } = constants
 
@@ -127,19 +124,3 @@ export default connect(
 		AddCustomer
 	)
 )
-
-// export default connect(
-// 	mapStateToProps,
-// 	mapDispatchToProps
-// )(compose(
-// 	graphql(addCustomer, { name: 'addCustomer' }),
-// 	graphql(getCustomerByAllQuery, {
-// 		options: props => ({
-// 			variables: {
-// 				name: 'Rafał Maje',
-// 				mail: 'zamowienia@skladmuzyczny.pl',
-// 				phone: '791 946 49312 346-18-42'
-// 			}
-// 		})
-// 	})
-// )(AddCustomer))

@@ -64,7 +64,7 @@ class App extends Component {
 						/>
 						<Route
 							exact
-							path='/customer/:customerID'
+							path='/customer/:name'
 							component={CustomerDetailPage}
 						/>
 						<Route

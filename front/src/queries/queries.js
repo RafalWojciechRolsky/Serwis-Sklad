@@ -60,6 +60,17 @@ const getCustomerByIdQuery = gql`
 			name
 			mail
 			phoneNumber
+			services {
+				RMANumber
+				id
+				RMA
+				brand
+				model
+				createdAt
+				finishedAt
+				price
+				whereToFix
+			}
 		}
 	}
 `
