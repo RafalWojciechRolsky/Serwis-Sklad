@@ -12,7 +12,6 @@ const ServicesList = props => {
 			return <div>Loading ...</div>
 		} else {
 			return data.servicesAll.map(el => {
-				console.log(el)
 				const customerPage = false
 				return (
 					<ServiceElementList

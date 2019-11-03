@@ -5,6 +5,7 @@ $font-color-1: #ffffff;
 $font-color-2: #76787a;
 $font-color-3: #162431;
 $serviceDetail__description-paragraph: #f9f9f96b;
+$error-color: #914040;
 
 
 * {
@@ -320,4 +321,14 @@ body {
 	background-color: $main-color-white;
 	padding: 2rem;
 	height: 30rem;
+}
+
+.customerDetail__error {
+	grid-column: 1 / 3;
+	background-color: $error-color;
+	padding: 3rem;
+	width: 100%;
+	color: $main-color-white;
+	text-align: center;
+
 }
