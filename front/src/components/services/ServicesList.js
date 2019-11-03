@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { graphql } from 'react-apollo'
 import { getServicesQuery } from '../../queries/queries'
 
-import ServiceElementList from './ServiceElementList'
+import ServiceElementList from './serviceListParts/ServiceElementList'
 import ServiceHeader from './ServiceHeader'
 
 const ServicesList = props => {
@@ -12,6 +12,7 @@ const ServicesList = props => {
 			return <div>Loading ...</div>
 		} else {
 			return data.servicesAll.map(el => {
+				console.log(el)
 				const customerPage = false
 				return (
 					<ServiceElementList
@@ -23,12 +24,6 @@ const ServicesList = props => {
 			})
 		}
 	}
-
-	// useEffect(() => {
-	// 	window.location.reload()
-	// }, [])
-
-	useEffect(() => {})
 
 	return (
 		<div className='main-container'>

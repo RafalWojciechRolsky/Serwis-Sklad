@@ -9,13 +9,15 @@ const {
 	ADD_BRAND,
 	ADD_TYPE,
 	ADD_WHERE_TO_FIX,
-	ADD_DESCRIPTION
+	ADD_DESCRIPTION,
+	ADD_ID
 } = constants
 
 const initialState = {
 	name: '',
 	mail: '',
 	phoneNumber: '',
+	id: '',
 	model: '',
 	brand: '',
 	type: '',
@@ -64,6 +66,11 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				description: action.description
+			}
+		case ADD_ID:
+			return {
+				...state,
+				id: action.id
 			}
 		default:
 			return state

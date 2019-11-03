@@ -36,13 +36,27 @@ const getCustomerByNameQuery = gql`
 	}
 `
 const getCustomerByAllQuery = gql`
-	query($name: String!, $mail: String!, $phone: String!) {
+	query getCustomerByAll(
+		$name: String!
+		$mail: String!
+		$phone: String!
+	) {
 		customerByAll(
 			name: $name
 			mail: $mail
 			phoneNumber: $phone
 		) {
 			id
+			name
+			mail
+			phoneNumber
+		}
+	}
+`
+
+const getCustomerByIdQuery = gql`
+	query getCustomerById($id: ID!) {
+		customerById(id: $id) {
 			name
 			mail
 			phoneNumber
@@ -67,10 +81,7 @@ const getServiceByRMAQuery = gql`
 			type
 			finishedAt
 			isActive
-			customerId {
-				id
-				name
-			}
+			customerId
 		}
 	}
 `
@@ -89,15 +100,12 @@ const getServicesQuery = gql`
 			type
 			finishedAt
 			isActive
-			customerId {
-				id
-				name
-			}
+			customerId
 		}
 	}
 `
 const addCustomer = gql`
-	mutation(
+	mutation addCustomer(
 		$name: String!
 		$mail: String!
 		$phone: String!
@@ -144,9 +152,7 @@ const addServiceMutation = gql`
 			status
 			internalAttention
 			isActive
-			customerId {
-				id
-			}
+			customerId
 		}
 	}
 `
@@ -206,5 +212,6 @@ export {
 	getCustomerByNameQuery,
 	getCustomerByAllQuery,
 	addCustomer,
-	addServiceMutation
+	addServiceMutation,
+	getCustomerByIdQuery
 }

@@ -32,12 +32,7 @@ const ServiceType = new GraphQLObjectType({
 		finishedAt: { type: GraphQLString },
 		whereToFix: { type: GraphQLString },
 		internalAttention: { type: GraphQLString },
-		customerId: {
-			type: CustomerType,
-			resolve(parent, args) {
-				return Customer.findOne()
-			}
-		},
+		customerId: { type: GraphQLString },
 		isActive: { type: GraphQLBoolean }
 	})
 })

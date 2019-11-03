@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
 import { getCustomerByNameQuery } from '../../queries/queries'
-import ServiceElementList from '../services/ServiceElementList'
+import ServiceElementList from '../services/serviceListParts/ServiceElementList'
 
 const CustomerDetailPage = props => {
 	if (props.data.customerByName) {

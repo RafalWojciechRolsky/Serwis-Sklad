@@ -9,7 +9,7 @@ import CustomersList from './components/customers/CustomersList'
 import CustomerDetailPage from './components/customers/CustomerDetailPage'
 import ServiceDetailPage from './components/services/ServiceDetailPage'
 import AddCustomer from './components/customers/AddCustomer'
-import AddService from './components/services/AddService'
+import AddService from './components/services/addCustomer/AddService'
 import store from './components/store/index'
 
 // Apollo client setup

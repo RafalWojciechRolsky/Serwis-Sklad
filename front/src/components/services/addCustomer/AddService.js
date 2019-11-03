@@ -3,9 +3,10 @@ import { graphql } from 'react-apollo'
 import { flowRight as compose } from 'lodash'
 import { connect } from 'react-redux'
 
-import LinkButton from '../LinkButton'
-import { addServiceMutation } from '../../queries/queries'
-import constants from './../store/constants'
+import LinkButton from '../../LinkButton'
+import { addServiceMutation } from '../../../queries/queries'
+import constants from '../../store/constants'
+import CustomerPartOfAddService from './CustomerPartOfAddService'
 
 const {
 	ADD_MODEL,
@@ -25,67 +26,29 @@ const AddService = props => {
 				type: props.type,
 				whereToFix: props.whereToFix,
 				description: props.description,
-				customerId: '5d8c9dd2807e981eb74ba5f1'
+				customerId: props.id
 			}
 		})
 	}
+	console.log(props.id)
+
 	return (
 		<div className='customerDetail'>
 			{/* ///////////////////////////////////////////////////////////////////////////////////////////////
 			// CUSTOMER PART */}
-			<h1 className='customerDetail__header'>
-				Dane klienta
-			</h1>
-			<form
-				className='customerDetail__form'
-				onSubmit={handleSubmitGraphQL}>
-				<label
-					className='customerDetail__label'
-					htmlFor='name'>
-					Imię i Nazwisko
-				</label>
-				<input
-					value={props.name}
-					onChange={() => {}}
-					name='name'
-					className='customerDetail__input'
-					type='text'
-					placeholder='Jakieś imię i nazwisko'
-				/>
-				<label
-					className='customerDetail__label'
-					htmlFor='mail'>
-					Kontakt mailowy
-				</label>
-				<input
-					value={props.mail}
-					onChange={() => {}}
-					name='mail'
-					className='customerDetail__input'
-					type='text'
-					placeholder='Jakiś kontakt mailowy'
-				/>
-				<label
-					phone='phoneNumber'
-					className='customerDetail__label'
-					htmlFor='phoneNumber'>
-					Kontakt telefoniczny
-				</label>
-				<input
-					value={props.phoneNumber}
-					onChange={() => {}}
-					name='phoneNumber'
-					className='customerDetail__input'
-					type='text'
-					placeholder='Jakiś numer telefonu'
-				/>
-			</form>
+			<CustomerPartOfAddService
+				nameProps={props.nameProps}
+				mailProps={props.mailProps}
+				phoneNumberProps={props.phoneNumberProps}
+			/>
 			{/* ///////////////////////////////////////////////////////////////////////////////////////////////
 			// SERVICE PART */}
 			<h1 className='serviceDetail__header serviceDetail__header--add'>
 				Detale naprawy
 			</h1>
-			<form className='customerDetail__form'>
+			<form
+				className='customerDetail__form'
+				onSubmit={handleSubmitGraphQL}>
 				<label
 					className='customerDetail__label'
 					htmlFor='model'>
@@ -165,14 +128,15 @@ const AddService = props => {
 
 const mapStateToProps = state => {
 	return {
-		name: state.name,
-		mail: state.mail,
-		phoneNumber: state.phoneNumber,
+		nameProps: state.name,
+		mailProps: state.mail,
+		phoneNumberProps: state.phoneNumber,
 		model: state.model,
 		brand: state.brand,
 		type: state.type,
 		whereToFix: state.whereToFix,
-		description: state.description
+		description: state.description,
+		id: state.id
 	}
 }
 

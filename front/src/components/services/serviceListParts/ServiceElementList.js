@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import CustomerPartOfServiceElementList from './CustomerPartOfServiceElementList'
 
 const Service = props => {
 	const {
@@ -37,7 +38,11 @@ const Service = props => {
 				<span> {brand}</span>
 				<span> {type}</span>
 				<span> {createdAt}</span>
-				<span> {customerId.name}</span>
+				<span>
+					<CustomerPartOfServiceElementList
+						customerId={customerId}
+					/>
+				</span>
 			</Link>
 		</li>
 	)
