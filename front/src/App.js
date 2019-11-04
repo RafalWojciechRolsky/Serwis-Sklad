@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import ServicesList from './components/services/ServicesList'
 import CustomersList from './components/customers/CustomersList'
 import CustomerDetailPage from './components/customers/CustomerDetailPage'
+import BlackPage from './components/customers/BlackPage'
 import ServiceDetailPage from './components/services/ServiceDetailPage'
 import AddCustomer from './components/customers/AddCustomer'
 import AddService from './components/services/addCustomer/AddService'
@@ -19,6 +20,11 @@ const client = new ApolloClient({
 
 class App extends Component {
 	render() {
+		const id = 'idStatic'
+		const name = 'nameStatic'
+		const mail = 'mailStatic'
+		const phoneNumber = 'phoneNumberStatic'
+
 		return (
 			<Provider store={store}>
 				<ApolloProvider client={client}>
@@ -35,9 +41,13 @@ class App extends Component {
 								to='/customers'>
 								Klienci
 							</Link>
+
 							<Link
 								className='menu__button'
-								to='/customer/addCustomer/'>
+								to={{
+									pathname: `/customer/addCustomer/`,
+									state: { id, name, mail, phoneNumber }
+								}}>
 								Nowy Serwis
 							</Link>
 						</div>
@@ -64,13 +74,13 @@ class App extends Component {
 						/>
 						<Route
 							exact
-							path='/customer/:name'
-							component={CustomerDetailPage}
+							path='/customer/addCustomer/'
+							component={AddCustomer}
 						/>
 						<Route
 							exact
-							path='/customer/addCustomer/'
-							component={AddCustomer}
+							path='/customer/:name'
+							component={CustomerDetailPage}
 						/>
 						<Route
 							exact

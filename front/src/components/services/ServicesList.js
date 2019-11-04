@@ -6,6 +6,8 @@ import ServiceElementList from './serviceListParts/ServiceElementList'
 import ServiceHeader from './ServiceHeader'
 
 const ServicesList = props => {
+	console.log('ServicesList', props.location)
+
 	const displayServices = () => {
 		let data = props.data
 		if (data.loading) {

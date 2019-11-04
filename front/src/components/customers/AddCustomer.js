@@ -11,6 +11,8 @@ import { addCustomer } from '../../queries/queries'
 const { ADD_NAME, ADD_MAIL, ADD_PHONE } = constants
 
 const AddCustomer = props => {
+	console.log('AddCustomer', props.location)
+
 	const handleSubmitGraphQL = e => {
 		e.preventDefault()
 		props.addCustomer({

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 const Customer = props => {
 	const { name, mail, phoneNumber, id } = props
-
 	return (
 		<li className='list__customers'>
 			<Link

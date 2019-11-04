@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Query } from 'react-apollo'
 import { graphql } from 'react-apollo'
 import { getCustomerByIdQuery } from '../../queries/queries'
@@ -7,7 +7,36 @@ import ServiceElementList from '../services/serviceListParts/ServiceElementList'
 const CustomerDetailPage = props => {
 	const { name, mail, phoneNumber } = props.location.state
 
+	console.log('CustomerDetailPage', props.location)
+
 	const displayCustomerServices = () => {
+		// return (
+		// 	<Query query={getCustomerByIdQuery}>
+		// 		{({ loading, error, data }) => {
+		// 			if (loading) {
+		// 				return <h2>Loading ...</h2>
+		// 			}
+		// 			if (error) {
+		// 				console.log(error)
+		// 			}
+
+		// 			return (
+		// 				<Fragment>
+		// 					TEST
+		// 					{/* {data.launches.map(launch => {
+		// 						return (
+		// 							<LaunchItem
+		// 								key={launch.flight_number}
+		// 								launch={launch}
+		// 							/>
+		// 						)
+		// 					})} */}
+		// 				</Fragment>
+		// 			)
+		// 		}}
+		// 	</Query>
+		// )
+
 		const data = props.data.customerById
 		if (props.data.loading) {
 			return <div>Loading ...</div>
@@ -69,6 +98,8 @@ const CustomerDetailPage = props => {
 		</div>
 	)
 }
+
+// export default CustomerDetailPage
 
 export default graphql(getCustomerByIdQuery, {
 	options: props => ({
