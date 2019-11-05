@@ -10,33 +10,6 @@ const CustomerDetailPage = props => {
 	console.log('CustomerDetailPage', props.location)
 
 	const displayCustomerServices = () => {
-		// return (
-		// 	<Query query={getCustomerByIdQuery}>
-		// 		{({ loading, error, data }) => {
-		// 			if (loading) {
-		// 				return <h2>Loading ...</h2>
-		// 			}
-		// 			if (error) {
-		// 				console.log(error)
-		// 			}
-
-		// 			return (
-		// 				<Fragment>
-		// 					TEST
-		// 					{/* {data.launches.map(launch => {
-		// 						return (
-		// 							<LaunchItem
-		// 								key={launch.flight_number}
-		// 								launch={launch}
-		// 							/>
-		// 						)
-		// 					})} */}
-		// 				</Fragment>
-		// 			)
-		// 		}}
-		// 	</Query>
-		// )
-
 		const data = props.data.customerById
 		if (props.data.loading) {
 			return <div>Loading ...</div>
@@ -44,15 +17,15 @@ const CustomerDetailPage = props => {
 			const customerPage = true
 			console.log(data)
 
-			// return data.services.map(el => {
-			// 	return (
-			// 		<ServiceElementList
-			// 			key={el.id}
-			// 			customerPage={customerPage}
-			// 			{...el}
-			// 		/>
-			// 	)
-			// })
+			return data.services.map(el => {
+				return (
+					<ServiceElementList
+						key={el.id}
+						customerPage={customerPage}
+						{...el}
+					/>
+				)
+			})
 		}
 	}
 
@@ -100,8 +73,6 @@ const CustomerDetailPage = props => {
 		</div>
 	)
 }
-
-// export default CustomerDetailPage
 
 export default graphql(getCustomerByIdQuery, {
 	options: props => ({

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
 import ServicesList from './components/services/ServicesList'
@@ -51,42 +51,43 @@ class App extends Component {
 								Nowy Serwis
 							</Link>
 						</div>
-
-						<Route
-							exact
-							path='/'
-							component={ServicesList}
-						/>
-						<Route
-							exact
-							path='/services'
-							component={ServicesList}
-						/>
-						<Route
-							exact
-							path='/customers'
-							component={CustomersList}
-						/>
-						<Route
-							exact
-							path='/services/RMA/:serviceID'
-							component={ServiceDetailPage}
-						/>
-						<Route
-							exact
-							path='/customer/addCustomer/'
-							component={AddCustomer}
-						/>
-						<Route
-							exact
-							path='/customer/:name'
-							component={CustomerDetailPage}
-						/>
-						<Route
-							exact
-							path='/services/addService/'
-							component={AddService}
-						/>
+						<Switch>
+							<Route
+								exact
+								path='/'
+								component={ServicesList}
+							/>
+							<Route
+								exact
+								path='/services'
+								component={ServicesList}
+							/>
+							<Route
+								exact
+								path='/customers'
+								component={CustomersList}
+							/>
+							<Route
+								exact
+								path='/services/RMA/:serviceID'
+								component={ServiceDetailPage}
+							/>
+							<Route
+								exact
+								path='/customer/addCustomer/'
+								component={AddCustomer}
+							/>
+							<Route
+								exact
+								path='/customer/:name'
+								component={CustomerDetailPage}
+							/>
+							<Route
+								exact
+								path='/services/addService/'
+								component={AddService}
+							/>
+						</Switch>
 					</div>
 				</ApolloProvider>
 			</Provider>
