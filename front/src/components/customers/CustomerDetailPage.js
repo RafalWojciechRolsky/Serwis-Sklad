@@ -42,15 +42,17 @@ const CustomerDetailPage = props => {
 			return <div>Loading ...</div>
 		} else {
 			const customerPage = true
-			return data.services.map(el => {
-				return (
-					<ServiceElementList
-						key={el.id}
-						customerPage={customerPage}
-						{...el}
-					/>
-				)
-			})
+			console.log(data)
+
+			// return data.services.map(el => {
+			// 	return (
+			// 		<ServiceElementList
+			// 			key={el.id}
+			// 			customerPage={customerPage}
+			// 			{...el}
+			// 		/>
+			// 	)
+			// })
 		}
 	}
 
