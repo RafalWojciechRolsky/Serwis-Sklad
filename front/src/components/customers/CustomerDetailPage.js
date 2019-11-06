@@ -3,9 +3,16 @@ import { Query } from 'react-apollo'
 import { graphql } from 'react-apollo'
 import { getCustomerByIdQuery } from '../../queries/queries'
 import ServiceElementList from '../services/serviceListParts/ServiceElementList'
+import { Link } from 'react-router-dom'
 
 const CustomerDetailPage = props => {
-	const { name, mail, phoneNumber } = props.location.state
+	const {
+		name,
+		mail,
+		phoneNumber,
+		id
+	} = props.location.state
+	const withCustomer = true
 
 	console.log('CustomerDetailPage', props.location)
 
@@ -15,7 +22,7 @@ const CustomerDetailPage = props => {
 			return <div>Loading ...</div>
 		} else {
 			const customerPage = true
-			console.log(data)
+			console.log(id)
 
 			return data.services.map(el => {
 				return (
@@ -70,6 +77,20 @@ const CustomerDetailPage = props => {
 					{displayCustomerServices()}
 				</ul>
 			</div>
+			<Link
+				className='customerDetail__button customerDetail__button--btn'
+				to={{
+					pathname: `/services/addService/`,
+					state: {
+						id,
+						name,
+						mail,
+						phoneNumber,
+						withCustomer
+					}
+				}}>
+				> Dodaj nowy serwis
+			</Link>
 		</div>
 	)
 }
