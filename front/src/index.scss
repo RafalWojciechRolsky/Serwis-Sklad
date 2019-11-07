@@ -242,6 +242,7 @@ body {
 
 	&__button {
 		margin: 0 auto;
+
 		margin-top: 3rem;
 		height: 5rem;
 		border: none;
@@ -252,9 +253,16 @@ body {
 		cursor: pointer;
 		color: $font-color-1;
 		text-align: center;
+		align-content: center;
 
 		&--btn {
 			width: 35rem;
+		}
+
+		&--link {
+			width: 25rem;
+			padding-top: 1rem;
+			margin: 0 0 2rem 4rem;
 		}
 	}
 }

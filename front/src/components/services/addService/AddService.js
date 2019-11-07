@@ -32,7 +32,7 @@ const AddService = props => {
 			}
 		})
 	}
-	console.log(props.location)
+	console.log('AddService', props.location)
 
 	if (withCustomer) {
 		return (

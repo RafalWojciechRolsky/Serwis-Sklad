@@ -12,6 +12,7 @@ const { ADD_NAME, ADD_MAIL, ADD_PHONE } = constants
 
 const AddCustomer = props => {
 	console.log('AddCustomer', props.location)
+	const withCustomer = false
 
 	const handleSubmitGraphQL = e => {
 		e.preventDefault()
@@ -75,7 +76,12 @@ const AddCustomer = props => {
 
 				<LinkButton
 					className='customerDetail__button customerDetail__button--btn'
-					to='/services/addService/'
+					to={{
+						pathname: `/services/addService/`,
+						state: {
+							withCustomer
+						}
+					}}
 					onClick={handleSubmitGraphQL}>
 					Dodaj klienta i przejdź do serwisu
 				</LinkButton>

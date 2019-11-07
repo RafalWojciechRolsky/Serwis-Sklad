@@ -7,10 +7,9 @@ import { Provider } from 'react-redux'
 import ServicesList from './components/services/ServicesList'
 import CustomersList from './components/customers/CustomersList'
 import CustomerDetailPage from './components/customers/CustomerDetailPage'
-import BlackPage from './components/customers/BlackPage'
 import ServiceDetailPage from './components/services/ServiceDetailPage'
 import AddCustomer from './components/customers/AddCustomer'
-import AddService from './components/services/addCustomer/AddService'
+import AddService from './components/services/addService/AddService'
 import store from './components/store/index'
 
 // Apollo client setup

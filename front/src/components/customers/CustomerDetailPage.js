@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react'
-import { Query } from 'react-apollo'
+import React from 'react'
 import { graphql } from 'react-apollo'
 import { getCustomerByIdQuery } from '../../queries/queries'
 import ServiceElementList from '../services/serviceListParts/ServiceElementList'
@@ -70,6 +69,20 @@ const CustomerDetailPage = props => {
 				</div>
 			</div>
 			<div className='customers-services'>
+				<Link
+					className='customerDetail__button customerDetail__button--btn customerDetail__button--link'
+					to={{
+						pathname: `/services/addService/`,
+						state: {
+							id,
+							name,
+							mail,
+							phoneNumber,
+							withCustomer
+						}
+					}}>
+					Dodaj nowy serwis
+				</Link>
 				<h2 className='customers-services__header'>
 					Lista serwisów klienta
 				</h2>
@@ -77,20 +90,6 @@ const CustomerDetailPage = props => {
 					{displayCustomerServices()}
 				</ul>
 			</div>
-			<Link
-				className='customerDetail__button customerDetail__button--btn'
-				to={{
-					pathname: `/services/addService/`,
-					state: {
-						id,
-						name,
-						mail,
-						phoneNumber,
-						withCustomer
-					}
-				}}>
-				> Dodaj nowy serwis
-			</Link>
 		</div>
 	)
 }

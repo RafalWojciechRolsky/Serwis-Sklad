@@ -42,7 +42,7 @@ const CustomerPartOfServiceElementList = props => {
 						return <div>Loading ...</div>
 					}
 					if (error) {
-						console.log(error)
+						console.log('Error', error)
 					}
 
 					return (
