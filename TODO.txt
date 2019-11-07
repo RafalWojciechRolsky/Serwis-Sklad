@@ -1,0 +1,15 @@
+todo:
+1. wyszukiwanie klientów po name, mail, phoneNumer
+2. wyszukiwanie serwisów po numerze RMA, nazwie produktu
+3. sortowanie serwisów wg RMA, daty przyjęcia, klienta
+4. edycja karty klienta
+5. edycja karty serwisu
+6. kasowanie klienta
+7. kasowanie serwisu
+8. drukowanie karty serwisu
+9. wysyłanie maila w informacją o zmianie statusu serwisu
+10. reload strony za Link lub upload danych bazy po przejściu na dana stronę, bo wyświetla sie zawartość cache
+11. zrobienie lokalnej bazy danych 
+12. udostępnienie strony w sieci lokalnej
+13. walidacja formularzy oraz bazy danych
+14. autoryzacja dostepu do serwisu
