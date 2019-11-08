@@ -167,6 +167,26 @@ const addServiceMutation = gql`
 		}
 	}
 `
+const updateCustomerById = gql`
+	mutation updateCustomerById(
+		$name: String!
+		$mail: String!
+		$phone: String!
+		$id: ID!
+	) {
+		updateCustomerById(
+			id: $id
+			name: $name
+			phoneNumber: $phone
+			mail: $mail
+		) {
+			name
+			mail
+			phoneNumber
+			id
+		}
+	}
+`
 
 export {
 	getCustomersQuery,
@@ -176,5 +196,6 @@ export {
 	getCustomerByAllQuery,
 	addCustomer,
 	addServiceMutation,
-	getCustomerByIdQuery
+	getCustomerByIdQuery,
+	updateCustomerById
 }

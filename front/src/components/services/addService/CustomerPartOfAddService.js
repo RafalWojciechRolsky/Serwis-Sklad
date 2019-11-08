@@ -78,20 +78,6 @@ const CustomerPartOfAddService = props => {
 					type='text'
 					placeholder='Jakiś numer telefonu'
 				/>
-				<label
-					phone='id'
-					className='customerDetail__label'
-					htmlFor='id'>
-					Numer ID KLienta
-				</label>
-				<input
-					value={data.customerByAll.id}
-					onChange={() => {}}
-					name='id'
-					className='customerDetail__input'
-					type='text'
-					placeholder='Numer Id Klienta'
-				/>
 			</form>
 			{props.handleChangeId(null, data.customerByAll.id)}
 		</Fragment>

@@ -311,20 +311,15 @@ const Mutation = new GraphQLObjectType({
 				phoneNumber: { type: GraphQLString }
 			},
 			async resolve(parent, args) {
-				let foundCustomer = await Customer.findById(args.id)
+				// let foundCustomer = await Customer.findById(args.id)
+				// console.log(foundCustomer)
 
-				let updateCustomerById = await Customer.findOneAndUpdate(
+				const updateCustomerById = await Customer.findByIdAndUpdate(
 					args.id,
 					{
-						name: args.name
-							? args.name
-							: foundCustomer.name,
-						mail: args.mail
-							? args.mail
-							: foundCustomer.mail,
+						name: args.name,
+						mail: args.mail,
 						phoneNumber: args.phoneNumber
-							? args.phoneNumber
-							: foundCustomer.phoneNumber
 					},
 					{ new: true },
 					(err, obj) => obj.id

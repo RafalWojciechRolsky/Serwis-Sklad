@@ -2,11 +2,32 @@ import React from 'react'
 import LinkButton from '../../LinkButton'
 import { connect } from 'react-redux'
 import constants from '../../store/constants'
+import { updateCustomerById } from '../../../queries/queries'
+import { graphql } from 'react-apollo'
 
 const { ADD_NAME, ADD_MAIL, ADD_PHONE } = constants
 
 const CustomerDetailPageEdit = props => {
-	const { name } = props.location.state
+	const {
+		name,
+		phoneNumber,
+		mail,
+		id
+	} = props.location.state
+
+	const handleSubmitGraphQL = e => {
+		e.preventDefault()
+		console.log(id)
+
+		props.updateCustomerById({
+			variables: {
+				id: id,
+				name: props.name,
+				mail: props.mail,
+				phone: props.phoneNumber
+			}
+		})
+	}
 
 	return (
 		<div className='customerDetail'>
@@ -15,7 +36,7 @@ const CustomerDetailPageEdit = props => {
 			</h1>
 			<form
 				className='customerDetail__form'
-				onSubmit={() => {}}>
+				onSubmit={handleSubmitGraphQL}>
 				<label
 					className='customerDetail__label'
 					htmlFor='name'>
@@ -27,7 +48,7 @@ const CustomerDetailPageEdit = props => {
 					name='name'
 					className='customerDetail__input'
 					type='text'
-					placeholder='Podaj nowe imię i nazwisko'
+					placeholder={name}
 				/>
 				<label
 					className='customerDetail__label'
@@ -40,7 +61,7 @@ const CustomerDetailPageEdit = props => {
 					name='mail'
 					className='customerDetail__input'
 					type='text'
-					placeholder='Podaj nowy kontakt mailowy'
+					placeholder={mail}
 				/>
 				<label
 					phone='phoneNumber'
@@ -54,7 +75,7 @@ const CustomerDetailPageEdit = props => {
 					name='phoneNumber'
 					className='customerDetail__input'
 					type='text'
-					placeholder='Podaj nowy kontakt telefoniczny'
+					placeholder={phoneNumber}
 				/>
 
 				<LinkButton
@@ -65,7 +86,7 @@ const CustomerDetailPageEdit = props => {
 							withCustomer: props.withCustomer
 						}
 					}}
-					onClick={() => {}}>
+					onClick={handleSubmitGraphQL}>
 					Aktualizuj dane klienta
 				</LinkButton>
 			</form>
@@ -110,4 +131,8 @@ const mapDispatchToProps = dispatch => {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(CustomerDetailPageEdit)
+)(
+	graphql(updateCustomerById, {
+		name: 'updateCustomerById'
+	})(CustomerDetailPageEdit)
+)
