@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql } from 'react-apollo'
+import { useQuery } from 'react-apollo-hooks'
 import { getCustomerByIdQuery } from '../../queries/queries'
 import ServiceElementList from '../services/serviceListParts/ServiceElementList'
 import { Link } from 'react-router-dom'
@@ -13,26 +13,37 @@ const CustomerDetailPage = props => {
 	} = props.location.state
 	const withCustomer = true
 
+	const { loading, error, data } = useQuery(
+		getCustomerByIdQuery,
+		{
+			variables: {
+				id: props.location.state.id
+			}
+		}
+	)
+
+	if (error) {
+		return <div>Error! {error.message}</div>
+	}
+
+	if (loading) {
+		return <div>Loading... </div>
+	}
+
 	console.log('CustomerDetailPage', props.location)
 
 	const displayCustomerServices = () => {
-		const data = props.data.customerById
-		if (props.data.loading) {
-			return <div>Loading ...</div>
-		} else {
-			const customerPage = true
-			console.log(id)
+		const customerPage = true
 
-			return data.services.map(el => {
-				return (
-					<ServiceElementList
-						key={el.id}
-						customerPage={customerPage}
-						{...el}
-					/>
-				)
-			})
-		}
+		return data.customerById.services.map(el => {
+			return (
+				<ServiceElementList
+					key={el.id}
+					customerPage={customerPage}
+					{...el}
+				/>
+			)
+		})
 	}
 
 	return (
@@ -94,10 +105,4 @@ const CustomerDetailPage = props => {
 	)
 }
 
-export default graphql(getCustomerByIdQuery, {
-	options: props => ({
-		variables: {
-			id: props.location.state.id
-		}
-	})
-})(CustomerDetailPage)
+export default CustomerDetailPage
