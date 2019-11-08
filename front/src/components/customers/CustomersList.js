@@ -3,9 +3,9 @@ import { useQuery } from 'react-apollo-hooks'
 
 import { getCustomersQuery } from '../../queries/queries'
 import CustomerElementList from './CustomerElementList'
-import CustomerHeader from './CustomerHeader'
+import CustomerHeader from './CustomerHeader.jsx'
 
-const CustomersList = props => {
+const CustomersList = () => {
 	const { data, error, loading } = useQuery(
 		getCustomersQuery
 	)

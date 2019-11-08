@@ -227,10 +227,12 @@ const Mutation = new GraphQLObjectType({
 					type: new GraphQLNonNull(GraphQLBoolean)
 				}
 			},
+
 			async resolve(parent, args) {
 				let updateService = await Service.findOneAndUpdate(
 					{ RMANumber: args.RMANumber },
-					{ isActive: args.finishedAt ? false : false },
+					{ isActive: args.isActive },
+					{ new: true },
 					(err, obj) => obj.RMANumber
 				)
 
@@ -254,8 +256,9 @@ const Mutation = new GraphQLObjectType({
 				whereToFix: { type: GraphQLString },
 				internalAttention: { type: GraphQLString }
 			},
+
 			async resolve(parent, args) {
-				let foundService = await Service.findOneAndUpdate(
+				let foundService = await Service.findOne(
 					{ RMANumber: args.RMANumber },
 					(err, obj) => obj.RMANumber
 				)
@@ -289,6 +292,7 @@ const Mutation = new GraphQLObjectType({
 							? args.internalAttention
 							: foundService.internalAttention
 					},
+					{ new: true },
 					(err, obj) => obj.RMANumber
 				)
 
@@ -307,16 +311,26 @@ const Mutation = new GraphQLObjectType({
 				phoneNumber: { type: GraphQLString }
 			},
 			async resolve(parent, args) {
-				let foundCustomerById = await Customer.findOneAndUpdate(
-					{ name: args.id },
+				let foundCustomer = await Customer.findById(args.id)
+
+				let updateCustomerById = await Customer.findOneAndUpdate(
+					args.id,
 					{
-						mail: args.mail,
+						name: args.name
+							? args.name
+							: foundCustomer.name,
+						mail: args.mail
+							? args.mail
+							: foundCustomer.mail,
 						phoneNumber: args.phoneNumber
+							? args.phoneNumber
+							: foundCustomer.phoneNumber
 					},
+					{ new: true },
 					(err, obj) => obj.id
 				)
 
-				return await foundCustomerById.save()
+				return await updateCustomerById.save()
 			}
 		},
 

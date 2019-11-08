@@ -4,7 +4,7 @@ import { useQuery } from 'react-apollo-hooks'
 import { getServicesQuery } from '../../queries/queries'
 
 import ServiceElementList from './serviceListParts/ServiceElementList'
-import ServiceHeader from './ServiceHeader'
+import ServiceHeader from './ServiceHeader.jsx'
 
 const ServicesList = props => {
 	console.log('ServicesList', props.location)

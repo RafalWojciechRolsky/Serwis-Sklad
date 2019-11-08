@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-apollo-hooks'
-import { getCustomerByIdQuery } from '../../queries/queries'
-import ServiceElementList from '../services/serviceListParts/ServiceElementList'
+import { getCustomerByIdQuery } from '../../../queries/queries'
+import ServiceElementList from '../../services/serviceListParts/ServiceElementList'
 import { Link } from 'react-router-dom'
 
 const CustomerDetailPage = props => {
@@ -94,6 +94,21 @@ const CustomerDetailPage = props => {
 					}}>
 					Dodaj nowy serwis
 				</Link>
+				<Link
+					className='customerDetail__button customerDetail__button--btn customerDetail__button--link'
+					to={{
+						pathname: `/customer/edit/${name}`,
+						state: {
+							id,
+							name,
+							mail,
+							phoneNumber,
+							withCustomer
+						}
+					}}>
+					Edit
+				</Link>
+
 				<h2 className='customers-services__header'>
 					Lista serwisów klienta
 				</h2>

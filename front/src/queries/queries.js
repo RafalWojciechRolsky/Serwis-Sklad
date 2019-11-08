@@ -168,54 +168,6 @@ const addServiceMutation = gql`
 	}
 `
 
-// const addServiceMutation = gql`
-// 	mutation addService(
-// 		$model: String!
-// 		$brand: String!
-// 		$description: String!
-// 		$type: String!
-// 		$customerId: String!
-// 	) {
-// 		addService(
-// 			model: $model
-// 			brand: $brand
-// 			description: $description
-// 			type: $type
-// 			customerId: $customerId
-// 		) {
-// 			id
-// 			model
-// 			brand
-// 			RMA
-// 			description
-// 			type
-// 			customerId {
-// 				id
-// 				name
-// 			}
-// 		}
-// 	}
-// `
-
-// const getServiceQueryByRMA = gql`
-// 	query getServiceQueryByRMA($RMANumber: RMANumber) {
-// 		serviceByRMA(RMANumber: $RMANumber) {
-// 			id
-// 			model
-// 			brand
-// 			RMA
-// 			description
-// 			type
-// 			customerId {
-// 				id
-// 				name
-// 			}
-// 				}
-// 			}
-// 		}
-// 	}
-// `
-
 export {
 	getCustomersQuery,
 	getServicesQuery,
