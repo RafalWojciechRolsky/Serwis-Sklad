@@ -1,19 +1,26 @@
 import React from 'react'
-import { graphql } from 'react-apollo'
+import { useQuery } from 'react-apollo-hooks'
+
 import { getCustomersQuery } from '../../queries/queries'
 import CustomerElementList from './CustomerElementList'
 import CustomerHeader from './CustomerHeader'
 
 const CustomersList = props => {
+	const { data, error, loading } = useQuery(
+		getCustomersQuery
+	)
+	if (error) {
+		return <div>Error! {error.message}</div>
+	}
+
+	if (loading) {
+		return <div>Loading... </div>
+	}
+
 	const displayCustomers = () => {
-		let data = props.data
-		if (data.loading) {
-			return <div>Loading ...</div>
-		} else {
-			return data.customersAll.map(el => {
-				return <CustomerElementList key={el.id} {...el} />
-			})
-		}
+		return data.customersAll.map(el => {
+			return <CustomerElementList key={el.id} {...el} />
+		})
 	}
 
 	return (
@@ -24,4 +31,4 @@ const CustomersList = props => {
 	)
 }
 
-export default graphql(getCustomersQuery)(CustomersList)
+export default CustomersList

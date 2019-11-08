@@ -1,5 +1,6 @@
 import React from 'react'
-import { graphql } from 'react-apollo'
+import { useQuery } from 'react-apollo-hooks'
+
 import { getServicesQuery } from '../../queries/queries'
 
 import ServiceElementList from './serviceListParts/ServiceElementList'
@@ -8,22 +9,28 @@ import ServiceHeader from './ServiceHeader'
 const ServicesList = props => {
 	console.log('ServicesList', props.location)
 
+	const { data, error, loading } = useQuery(
+		getServicesQuery
+	)
+	if (error) {
+		return <div>Error! {error.message}</div>
+	}
+
+	if (loading) {
+		return <div>Loading... </div>
+	}
+
 	const displayServices = () => {
-		let data = props.data
-		if (data.loading) {
-			return <div>Loading ...</div>
-		} else {
-			return data.servicesAll.map(el => {
-				const customerPage = false
-				return (
-					<ServiceElementList
-						key={el.id}
-						customerPage={customerPage}
-						{...el}
-					/>
-				)
-			})
-		}
+		return data.servicesAll.map(el => {
+			const customerPage = false
+			return (
+				<ServiceElementList
+					key={el.id}
+					customerPage={customerPage}
+					{...el}
+				/>
+			)
+		})
 	}
 
 	return (
@@ -34,4 +41,4 @@ const ServicesList = props => {
 	)
 }
 
-export default graphql(getServicesQuery)(ServicesList)
+export default ServicesList
