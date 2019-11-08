@@ -1,14 +1,17 @@
 import React from 'react'
 import LinkButton from '../../LinkButton'
 import { connect } from 'react-redux'
+import constants from '../../store/constants'
+
+const { ADD_NAME, ADD_MAIL, ADD_PHONE } = constants
 
 const CustomerDetailPageEdit = props => {
-	const { name, mail, phoneNumber } = props.location.state
+	const { name } = props.location.state
 
 	return (
 		<div className='customerDetail'>
 			<h1 className='customerDetail__header'>
-				Dodaj klienta
+				{`Edytuj dane klienta ${name}`}
 			</h1>
 			<form
 				className='customerDetail__form'
@@ -19,12 +22,12 @@ const CustomerDetailPageEdit = props => {
 					Imię i Nazwisko
 				</label>
 				<input
-					value={name}
-					onChange={() => {}}
+					value={props.name}
+					onChange={props.handleChangeName}
 					name='name'
 					className='customerDetail__input'
 					type='text'
-					placeholder='Podaj imie i nazwisko'
+					placeholder='Podaj nowe imię i nazwisko'
 				/>
 				<label
 					className='customerDetail__label'
@@ -32,12 +35,12 @@ const CustomerDetailPageEdit = props => {
 					Kontakt mailowy
 				</label>
 				<input
-					onChange={() => {}}
-					value={mail}
+					onChange={props.handleChangeMail}
+					value={props.mail}
 					name='mail'
 					className='customerDetail__input'
 					type='text'
-					placeholder='Podaj maila'
+					placeholder='Podaj nowy kontakt mailowy'
 				/>
 				<label
 					phone='phoneNumber'
@@ -46,12 +49,12 @@ const CustomerDetailPageEdit = props => {
 					Kontakt telefoniczny
 				</label>
 				<input
-					onChange={() => {}}
-					value={phoneNumber}
+					onChange={props.handleChangePhone}
+					value={props.phoneNumber}
 					name='phoneNumber'
 					className='customerDetail__input'
 					type='text'
-					placeholder='Podaj numer telefonu'
+					placeholder='Podaj nowy kontakt telefoniczny'
 				/>
 
 				<LinkButton
@@ -63,7 +66,7 @@ const CustomerDetailPageEdit = props => {
 						}
 					}}
 					onClick={() => {}}>
-					Dodaj klienta i przejdź do serwisu
+					Aktualizuj dane klienta
 				</LinkButton>
 			</form>
 		</div>
@@ -78,6 +81,33 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps)(
-	CustomerDetailPageEdit
-)
+const mapDispatchToProps = dispatch => {
+	return {
+		handleChangeName: e => {
+			const action = {
+				type: ADD_NAME,
+				name: e.target.value
+			}
+			dispatch(action)
+		},
+		handleChangeMail: e => {
+			const action = {
+				type: ADD_MAIL,
+				mail: e.target.value
+			}
+			dispatch(action)
+		},
+		handleChangePhone: e => {
+			const action = {
+				type: ADD_PHONE,
+				phoneNumber: e.target.value
+			}
+			dispatch(action)
+		}
+	}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(CustomerDetailPageEdit)

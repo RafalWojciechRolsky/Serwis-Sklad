@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 
 import LinkButton from '../LinkButton'
 import constants from './../store/constants'
-
 import { addCustomer } from '../../queries/queries'
 
 const { ADD_NAME, ADD_MAIL, ADD_PHONE } = constants
