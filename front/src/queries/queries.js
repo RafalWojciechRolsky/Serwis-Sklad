@@ -187,6 +187,45 @@ const updateCustomerById = gql`
 		}
 	}
 `
+const updateServiceByRMA = gql`
+	mutation updateServiceByRMA(
+		$RMANumber: Int!
+		$model: String!
+		$brand: String!
+		$type: String!
+		$description: String!
+		$price: Int!
+		$status: String!
+		$finishedAt: String!
+		$whereToFix: String!
+		$internalAttention: String!
+	) {
+		updateServiceByRMANumber(
+			RMANumber: $RMANumber
+			model: $model
+			brand: $brand
+			type: $type
+			description: $description
+			price: $price
+			status: $status
+			finishedAt: $finishedAt
+			whereToFix: $whereToFix
+			internalAttention: $internalAttention
+		) {
+			id
+			model
+			brand
+			type
+			description
+			price
+			status
+			finishedAt
+			whereToFix
+			internalAttention
+			RMA
+		}
+	}
+`
 
 export {
 	getCustomersQuery,
@@ -197,5 +236,6 @@ export {
 	addCustomer,
 	addServiceMutation,
 	getCustomerByIdQuery,
-	updateCustomerById
+	updateCustomerById,
+	updateServiceByRMA
 }

@@ -242,7 +242,7 @@ const Mutation = new GraphQLObjectType({
 
 		//////////////////////////////////////////////////////////////////////////////////////
 		// UPDATING SERVICE DO DB
-		updateService: {
+		updateServiceByRMANumber: {
 			type: ServiceType,
 			args: {
 				RMANumber: { type: new GraphQLNonNull(GraphQLInt) },
@@ -311,18 +311,22 @@ const Mutation = new GraphQLObjectType({
 				phoneNumber: { type: GraphQLString }
 			},
 			async resolve(parent, args) {
-				// let foundCustomer = await Customer.findById(args.id)
-				// console.log(foundCustomer)
+				let foundCustomer = await Customer.findById(args.id)
 
 				const updateCustomerById = await Customer.findByIdAndUpdate(
 					args.id,
 					{
-						name: args.name,
-						mail: args.mail,
+						name: args.name
+							? args.name
+							: foundCustomer.name,
+						mail: args.mail
+							? args.mail
+							: foundCustomer.mail,
 						phoneNumber: args.phoneNumber
+							? args.phoneNumber
+							: foundCustomer.phoneNumber
 					},
-					{ new: true },
-					(err, obj) => obj.id
+					{ new: true }
 				)
 
 				return await updateCustomerById.save()
