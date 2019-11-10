@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import LinkButton from '../../LinkButton'
 import { connect } from 'react-redux'
 import constants from '../../store/constants'
-import { updateServiceByRMA } from '../../../queries/queries'
+import { updateServiceById } from '../../../queries/queries'
 import { graphql } from 'react-apollo'
 
 const {
@@ -20,8 +20,8 @@ const {
 
 const ServiceDetailPageEdit = props => {
 	const {
+		id,
 		RMA,
-		RMANumber,
 		brand,
 		model,
 		type,
@@ -37,14 +37,14 @@ const ServiceDetailPageEdit = props => {
 	const handleSubmitGraphQL = e => {
 		e.preventDefault()
 
-		props.updateServiceByRMA({
+		props.updateServiceById({
 			variables: {
-				RMANumer: RMANumber,
+				id: id,
 				model: props.model,
 				brand: props.brand,
 				type: props.type,
 				description: props.description,
-				price: props.price,
+				price: parseInt(props.price),
 				status: props.status,
 				finishedAt: props.finishedAt,
 				whereToFix: props.whereToFix,
@@ -214,7 +214,7 @@ const ServiceDetailPageEdit = props => {
 							pathname: `/`
 						}}
 						onClick={handleSubmitGraphQL}>
-						Aktualizuj dane klienta
+						Aktualizuj dane serwisu
 					</LinkButton>
 				</form>
 			</div>
@@ -224,16 +224,16 @@ const ServiceDetailPageEdit = props => {
 
 const mapStateToProps = state => {
 	return {
-		brand: state.brand,
 		model: state.model,
+		brand: state.brand,
 		type: state.type,
-		customerId: state.customerId,
+		description: state.description,
+		price: state.price,
 		status: state.status,
-		createdAt: state.createdAt,
 		finishedAt: state.finishedAt,
 		whereToFix: state.whereToFix,
-		price: state.price,
-		description: state.description
+		customerId: state.customerId,
+		createdAt: state.createdAt
 	}
 }
 
@@ -316,7 +316,7 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(
-	graphql(updateServiceByRMA, {
-		name: 'updateServiceByRMA'
+	graphql(updateServiceById, {
+		name: 'updateServiceById'
 	})(ServiceDetailPageEdit)
 )

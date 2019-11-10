@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 const ServiceDetailPageJSX = props => {
 	const {
 		RMA,
+		id,
 		RMANumber,
 		brand,
 		model,
@@ -124,6 +125,7 @@ const ServiceDetailPageJSX = props => {
 				to={{
 					pathname: `/serviceDetailPage`,
 					state: {
+						id,
 						RMA,
 						RMANumber,
 						brand,

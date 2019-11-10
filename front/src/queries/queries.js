@@ -169,10 +169,10 @@ const addServiceMutation = gql`
 `
 const updateCustomerById = gql`
 	mutation updateCustomerById(
+		$id: ID!
 		$name: String
 		$mail: String
 		$phone: String
-		$id: ID!
 	) {
 		updateCustomerById(
 			id: $id
@@ -180,51 +180,38 @@ const updateCustomerById = gql`
 			phoneNumber: $phone
 			mail: $mail
 		) {
-			name
-			mail
-			phoneNumber
 			id
 		}
 	}
 `
-
-const updateServiceByRMA = gql`
-	mutation updateServiceByRMA(
-		$RMANumber: Int!
+const updateServiceById = gql`
+	mutation updateServiceById(
+		$id: ID!
 		$model: String
 		$brand: String
 		$type: String
 		$description: String
-		$price: Int
 		$status: String
 		$finishedAt: String
 		$whereToFix: String
 		$customerId: String
 		$createdAt: String
+		$price: Int
 	) {
-		updateServiceByRMANumber(
-			RMANumber: $RMANumber
+		updateServiceById(
+			id: $id
 			model: $model
 			brand: $brand
 			type: $type
 			description: $description
-			price: $price
 			status: $status
 			finishedAt: $finishedAt
 			whereToFix: $whereToFix
 			customerId: $customerId
 			createdAt: $createdAt
+			price: $price
 		) {
 			id
-			model
-			brand
-			type
-			description
-			price
-			status
-			finishedAt
-			whereToFix
-			RMA
 		}
 	}
 `
@@ -239,5 +226,5 @@ export {
 	addServiceMutation,
 	getCustomerByIdQuery,
 	updateCustomerById,
-	updateServiceByRMA
+	updateServiceById
 }

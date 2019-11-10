@@ -3,7 +3,6 @@ const graphql = require('graphql')
 const Service = require('../modelsDB/service')
 const Customer = require('../modelsDB/customers')
 const numberOfServices = require('../modelsDB/numberOfServices')
-// const _ = require('lodash')
 
 const {
 	GraphQLSchema,
@@ -242,10 +241,10 @@ const Mutation = new GraphQLObjectType({
 
 		//////////////////////////////////////////////////////////////////////////////////////
 		// UPDATING SERVICE DO DB
-		updateServiceByRMANumber: {
+		updateServiceById: {
 			type: ServiceType,
 			args: {
-				RMANumber: { type: new GraphQLNonNull(GraphQLInt) },
+				id: { type: new GraphQLNonNull(GraphQLID) },
 				model: { type: GraphQLString },
 				brand: { type: GraphQLString },
 				type: { type: GraphQLString },
@@ -257,31 +256,26 @@ const Mutation = new GraphQLObjectType({
 				customerId: { type: GraphQLString },
 				createdAt: { type: GraphQLString }
 			},
-
 			async resolve(parent, args) {
-				console.log(args)
+				let foundService = await Service.findById(args.id)
+				console.log('updateServiceById', args)
 
-				let foundService = await Service.findOne(
-					{ RMANumber: args.RMANumber },
-					(err, obj) => obj.RMANumber
-				)
-
-				let updateService = await Service.findOneAndUpdate(
-					{ RMANumber: args.RMANumber },
+				let updateService = await Service.findByIdAndUpdate(
+					args.id,
 					{
-						price: args.price
-							? args.price
-							: foundService.price,
-						brand: args.brand
-							? args.brand
-							: foundService.brand,
 						model: args.model
 							? args.model
 							: foundService.model,
+						brand: args.brand
+							? args.brand
+							: foundService.brand,
+						type: args.type ? args.type : foundService.type,
 						description: args.description
 							? args.description
 							: foundService.description,
-						type: args.type ? args.type : foundService.type,
+						price: args.price
+							? args.price
+							: foundService.price,
 						status: args.status
 							? args.status
 							: foundService.status,
@@ -298,14 +292,11 @@ const Mutation = new GraphQLObjectType({
 							? args.createdAt
 							: foundService.createdAt
 					},
-					{ new: true },
-					(err, obj) => obj.RMANumber
+					{ new: true }
 				)
-
 				return await updateService.save()
 			}
 		},
-
 		//////////////////////////////////////////////////////////////////////////////////////
 		// UPDATING CUSTOMER DO DB
 		updateCustomerById: {
@@ -317,6 +308,8 @@ const Mutation = new GraphQLObjectType({
 				phoneNumber: { type: GraphQLString }
 			},
 			async resolve(parent, args) {
+				console.log('updateCustomerById', args)
+
 				let foundCustomer = await Customer.findById(args.id)
 
 				const updateCustomerById = await Customer.findByIdAndUpdate(
