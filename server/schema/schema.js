@@ -254,10 +254,13 @@ const Mutation = new GraphQLObjectType({
 				status: { type: GraphQLString },
 				finishedAt: { type: GraphQLString },
 				whereToFix: { type: GraphQLString },
-				internalAttention: { type: GraphQLString }
+				customerId: { type: GraphQLString },
+				createdAt: { type: GraphQLString }
 			},
 
 			async resolve(parent, args) {
+				console.log(args)
+
 				let foundService = await Service.findOne(
 					{ RMANumber: args.RMANumber },
 					(err, obj) => obj.RMANumber
@@ -288,9 +291,12 @@ const Mutation = new GraphQLObjectType({
 						whereToFix: args.whereToFix
 							? args.whereToFix
 							: foundService.whereToFix,
-						internalAttention: args.internalAttention
-							? args.internalAttention
-							: foundService.internalAttention
+						customerId: args.customerId
+							? args.customerId
+							: foundService.customerId,
+						createdAt: args.createdAt
+							? args.createdAt
+							: foundService.createdAt
 					},
 					{ new: true },
 					(err, obj) => obj.RMANumber

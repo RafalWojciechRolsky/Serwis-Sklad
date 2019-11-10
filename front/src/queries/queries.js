@@ -169,9 +169,9 @@ const addServiceMutation = gql`
 `
 const updateCustomerById = gql`
 	mutation updateCustomerById(
-		$name: String!
-		$mail: String!
-		$phone: String!
+		$name: String
+		$mail: String
+		$phone: String
 		$id: ID!
 	) {
 		updateCustomerById(
@@ -187,18 +187,20 @@ const updateCustomerById = gql`
 		}
 	}
 `
+
 const updateServiceByRMA = gql`
 	mutation updateServiceByRMA(
 		$RMANumber: Int!
-		$model: String!
-		$brand: String!
-		$type: String!
-		$description: String!
-		$price: Int!
-		$status: String!
-		$finishedAt: String!
-		$whereToFix: String!
-		$internalAttention: String!
+		$model: String
+		$brand: String
+		$type: String
+		$description: String
+		$price: Int
+		$status: String
+		$finishedAt: String
+		$whereToFix: String
+		$customerId: String
+		$createdAt: String
 	) {
 		updateServiceByRMANumber(
 			RMANumber: $RMANumber
@@ -210,7 +212,8 @@ const updateServiceByRMA = gql`
 			status: $status
 			finishedAt: $finishedAt
 			whereToFix: $whereToFix
-			internalAttention: $internalAttention
+			customerId: $customerId
+			createdAt: $createdAt
 		) {
 			id
 			model
@@ -221,7 +224,6 @@ const updateServiceByRMA = gql`
 			status
 			finishedAt
 			whereToFix
-			internalAttention
 			RMA
 		}
 	}

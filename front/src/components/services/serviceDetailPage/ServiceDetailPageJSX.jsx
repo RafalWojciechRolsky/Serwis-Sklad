@@ -1,9 +1,11 @@
 import React from 'react'
 import CustomerPartOfServiceElementList from '../serviceListParts/CustomerPartOfServiceElementList'
+import { Link } from 'react-router-dom'
 
 const ServiceDetailPageJSX = props => {
 	const {
 		RMA,
+		RMANumber,
 		brand,
 		model,
 		type,
@@ -117,6 +119,27 @@ const ServiceDetailPageJSX = props => {
 					</div>
 				</div>
 			</div>
+			<Link
+				className='customerDetail__button customerDetail__button--btn customerDetail__button--link'
+				to={{
+					pathname: `/serviceDetailPage`,
+					state: {
+						RMA,
+						RMANumber,
+						brand,
+						model,
+						type,
+						customerId,
+						status,
+						createdAt,
+						finishedAt,
+						whereToFix,
+						price,
+						description
+					}
+				}}>
+				Edit
+			</Link>
 			<div className='serviceDetail__description'>
 				<p className='serviceDetail__description-paragraph'>
 					{description}

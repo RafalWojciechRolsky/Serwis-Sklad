@@ -81,7 +81,7 @@ const CustomerDetailPageEdit = props => {
 				<LinkButton
 					className='customerDetail__button customerDetail__button--btn'
 					to={{
-						pathname: `/`,
+						pathname: `/customers`,
 						state: {
 							withCustomer: props.withCustomer
 						}

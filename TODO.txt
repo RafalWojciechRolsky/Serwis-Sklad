@@ -2,7 +2,7 @@ todo:
 1. wyszukiwanie klientów po name, mail, phoneNumer
 2. wyszukiwanie serwisów po numerze RMA, nazwie produktu
 3. sortowanie serwisów wg RMA, daty przyjęcia, klienta
-4. edycja karty klienta
+4. edycja karty klienta - done
 5. edycja karty serwisu
 6. kasowanie klienta
 7. kasowanie serwisu
@@ -12,4 +12,5 @@ todo:
 11. zrobienie lokalnej bazy danych 
 12. udostępnienie strony w sieci lokalnej
 13. walidacja formularzy oraz bazy danych
-14. autoryzacja dostepu do serwisu
+14. autoryzacja dostępu do serwisu
+15. czyścić Stand Redux

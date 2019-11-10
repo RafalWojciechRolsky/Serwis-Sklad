@@ -10,7 +10,12 @@ const {
 	ADD_TYPE,
 	ADD_WHERE_TO_FIX,
 	ADD_DESCRIPTION,
-	ADD_ID
+	ADD_ID,
+	ADD_CUSTOMER_ID,
+	ADD_STATUS,
+	ADD_CREATE_AT,
+	ADD_FINISHED_AT,
+	ADD_PRICE
 } = constants
 
 const initialState = {
@@ -22,7 +27,12 @@ const initialState = {
 	brand: '',
 	type: '',
 	description: '',
-	whereToFix: ''
+	whereToFix: '',
+	customerId: '',
+	status: '',
+	createdAt: '',
+	finishedAt: '',
+	price: ''
 }
 
 const reducer = (state = initialState, action) => {
@@ -71,6 +81,31 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				id: action.id
+			}
+		case ADD_CUSTOMER_ID:
+			return {
+				...state,
+				customerId: action.customerId
+			}
+		case ADD_STATUS:
+			return {
+				...state,
+				status: action.status
+			}
+		case ADD_CREATE_AT:
+			return {
+				...state,
+				createdAt: action.createdAt
+			}
+		case ADD_FINISHED_AT:
+			return {
+				...state,
+				finishedAt: action.finishedAt
+			}
+		case ADD_PRICE:
+			return {
+				...state,
+				price: action.price
 			}
 		default:
 			return state

@@ -6,6 +6,7 @@ import { ApolloProvider as ApolloProviderHooks } from 'react-apollo-hooks'
 import { Route, Link, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
+import ServiceDetailPageEdit from './components/services/serviceDetailPage/ServiceDetailPageEdit'
 import CustomerDetailPageEdit from './components/customers/customerDetailPage/CustomerDetailPageEdit'
 import ServicesList from './components/services/ServicesList'
 import CustomersList from './components/customers/CustomersList'
@@ -97,6 +98,11 @@ class App extends Component {
 										exact
 										path='/customer/edit/:name'
 										component={CustomerDetailPageEdit}
+									/>
+									<Route
+										exact
+										path='/serviceDetailPage'
+										component={ServiceDetailPageEdit}
 									/>
 								</Switch>
 							</Suspense>
