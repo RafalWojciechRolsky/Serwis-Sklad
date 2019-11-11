@@ -75,7 +75,7 @@ const RootQuery = new GraphQLObjectType({
 			},
 			resolve(parent, args) {
 				return Service.find(
-					{ model: args.model },
+					{ model: new RegExp(args.model) },
 					(err, obj) => obj.model
 				)
 			}
@@ -87,7 +87,7 @@ const RootQuery = new GraphQLObjectType({
 			},
 			resolve(parent, args) {
 				return Service.find(
-					{ brand: args.brand },
+					{ brand: new RegExp(args.brand) },
 					(err, obj) => obj.brand
 				)
 			}

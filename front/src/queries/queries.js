@@ -1,5 +1,22 @@
 import { gql } from 'apollo-boost'
 
+const getServicesByModel = gql`
+	query servicesByModel($model: String) {
+		servicesByModel(model: $model) {
+			id
+			model
+			brand
+			RMA
+			createdAt
+			type
+			customerId
+			whereToFix
+			type
+			finishedAt
+		}
+	}
+`
+
 const getCustomersQuery = gql`
 	query getCustomersAll {
 		customersAll {
@@ -126,9 +143,6 @@ const addCustomer = gql`
 			mail: $mail
 			phoneNumber: $phone
 		) {
-			name
-			mail
-			phoneNumber
 			id
 		}
 	}
@@ -152,18 +166,6 @@ const addServiceMutation = gql`
 			whereToFix: $whereToFix
 		) {
 			id
-			model
-			brand
-			type
-			whereToFix
-			RMA
-			createdAt
-			description
-			price
-			status
-			internalAttention
-			isActive
-			customerId
 		}
 	}
 `
@@ -226,5 +228,6 @@ export {
 	addServiceMutation,
 	getCustomerByIdQuery,
 	updateCustomerById,
-	updateServiceById
+	updateServiceById,
+	getServicesByModel
 }

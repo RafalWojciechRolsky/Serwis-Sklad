@@ -15,6 +15,7 @@ import ServiceDetailPage from './components/services/serviceDetailPage/ServiceDe
 import AddCustomer from './components/customers/AddCustomer'
 import AddService from './components/services/addService/AddService'
 import store from './components/store/index'
+import Search from './components/search/Search'
 
 // Apollo client setup
 const client = new ApolloClient({
@@ -55,6 +56,9 @@ class App extends Component {
 										state: { id, name, mail, phoneNumber }
 									}}>
 									Nowy Serwis
+								</Link>
+								<Link className='menu__button' to='/search'>
+									Search
 								</Link>
 							</div>
 							<Suspense fallback={<div>Loading!!...</div>}>
@@ -103,6 +107,11 @@ class App extends Component {
 										exact
 										path='/serviceDetailPage'
 										component={ServiceDetailPageEdit}
+									/>
+									<Route
+										exact
+										path='/search'
+										component={Search}
 									/>
 								</Switch>
 							</Suspense>
