@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const graphqlHTTP = require('express-graphql')
 const schema = require('./schema/schema')
@@ -8,10 +10,13 @@ const cors = require('cors')
 const app = express()
 app.use(cors())
 
-// mongodb+srv://raaf:<password>@cluster0-oyjol.azure.mongodb.net/test?retryWrites=true&w=majority
+const login = process.env.MONGODB_LOGIN
+const password = process.env.MONGODB_PASSWORD
+const host = process.env.MONGODB_HOST
+const port = process.env.NODE_PORT
 
 mongoose.connect(
-	'mongodb+srv://raaf:5ScqivAsgFYpjGH@cluster0-oyjol.azure.mongodb.net/serwis-sklad?retryWrites=true&w=majority',
+	`mongodb+srv://${login}:${password}@${host}`,
 	{
 		useUnifiedTopology: true,
 		useNewUrlParser: true,
@@ -31,6 +36,6 @@ app.use(
 	})
 )
 
-app.listen(4000, () => {
-	console.log('server is running on 4000 port')
+app.listen(port, () => {
+	console.log(`server is running on ${port} port`)
 })
